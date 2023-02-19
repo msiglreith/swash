@@ -846,7 +846,7 @@ impl<'a> Hinter<'a> {
             HinterMode::Legacy => (true, true, false, false),
             HinterMode::GrayscaleSubpixel => (false, false, true, true),
             HinterMode::Subpixel => (false, false, true, false),
-            HinterMode::Modern => (false, false, true, false),
+            HinterMode::Modern => (false, true, false, true),
         };
         self.v35 = v35;
         self.subpixel = subpixel;
