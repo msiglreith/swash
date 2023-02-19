@@ -470,12 +470,15 @@ impl CoverageBuilder {
         coverage.push(self.min);
         coverage.push(self.max);
         let bit_base = coverage.len();
-        let range_len = (self.max - self.min) as usize + 1;
-        coverage.resize(coverage.len() + (range_len + 15) / 16, 0);
-        for g in &self.coverage.list {
-            let bit = g - self.min;
-            let idx = bit_base + bit as usize / 16;
-            coverage[idx] |= 1 << (bit & 15);
+
+        if self.max > self.min {
+            let range_len = (self.max - self.min) as usize + 1;
+            coverage.resize(coverage.len() + (range_len + 15) / 16, 0);
+            for g in &self.coverage.list {
+                let bit = g - self.min;
+                let idx = bit_base + bit as usize / 16;
+                coverage[idx] |= 1 << (bit & 15);
+            }
         }
         key
     }
